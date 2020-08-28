@@ -1,0 +1,130 @@
+#wrapper {
+    background: #ccc;
+    border-radius: 20px;
+    box-shadow: 0 0 10px #333;
+    margin: 10px auto;
+    padding: 20px;
+    width: 800px;
+}
+
+.count {
+    color: #666;
+    float: right;
+    margin-right: 5px;
+}
+
+.reply {
+    background: rgba(211,211,211,0.4);
+    border-radius: 10px;
+    box-shadow: 0 0 4px  #666 inset;
+    margin: 4px;
+}
+
+.reply.deny {
+    background: rgba(160,30,10,0.2);
+}
+
+.reply.query {
+    background: rgba(240,240,40,0.2);
+}
+
+.reply.support {
+    background: rgba(30,160,10,0.2);
+}
+
+.rumour {
+    background: rgba(130,130,130,0.3);
+    border-radius: 10px;
+    box-shadow: 0 0 3px inset;
+    color: #222;
+    cursor: pointer;
+    display: inline-block;
+    margin: 7px 5px;
+    padding: 5px 10px;
+}
+
+.rumour:hover {
+    background: rgba(0,0,0,0.2);
+}
+
+.thread {
+    background: rgba(0,0,0,0.07);
+    border-radius: 10px;
+    margin: 5px;
+    padding: 5px 10px;
+}
+
+.thread div {
+    padding: 7px;
+}
+
+.thread div:not(:first-of-type) {
+    border-top: 1px solid #888;
+}
+
+a {
+    color: #349;
+    text-decoration: none;
+}
+
+a.fetch {
+    color: #349;
+    text-decoration: none;
+    background: #eee;
+    border: 1px solid #999;
+    border-radius: 5px;
+    font-size: 14px;
+    padding: 5px;
+}
+
+a.fetch:hover {
+    color: #35c;
+    text-decoration: none;
+}
+
+a.external {
+    color: #630;
+}
+
+a.external:hover {
+    color: #35c;
+    text-decoration: underline;
+}
+
+body {
+    background: #555;
+    font-family: sans-serif;
+}
+
+button {
+    background: #eee;
+}
+
+form {
+    text-align: center;
+}
+
+h1 {
+    margin: 0 0 20px  0;
+    text-align: center;
+}
+
+h3 {
+    margin: 10px 0;
+}
+
+input {
+    width: 600px;
+}
+
+input, button {
+    border: 1px solid #999;
+    border-radius: 5px;
+    font-size: 14px;
+    padding: 5px;
+}
+
+nav {
+    text-align: center;
+    user-select: none;
+}

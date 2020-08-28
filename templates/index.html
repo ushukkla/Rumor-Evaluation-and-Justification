@@ -1,0 +1,89 @@
+<html>
+<head>
+  <title>Rumour evaluation</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="wrapper">
+    <header><h1>Rumour evaluation</h1></header>
+    <form id="search-form"><input id="search">
+      <button>Search</button>
+      <a class="fetch" href="/fetch">Fetch more tweets</a>
+    </form>
+    <nav>
+      {% for rumour in rumours %}
+        <span class="rumour">{{rumour}}</span>
+      {% endfor %}
+    </nav>
+    <section>
+      <h2>Results <span class="count"></span></h2>
+      <div id="error"></div>
+      <main></main>
+    </section>
+  </div>
+
+  <script>
+    window.onhashchange = function () {
+      var url = location.hash.slice(1).replace(/#/g, '%23');
+      ajax_get(url, renderThreads, function(err) {
+        renderThreads([]);
+        $('#error').innerHTML = err;
+      })
+    };
+
+    function ajax_get(url, success, failure){
+      var xhr = new XMLHttpRequest();
+      xhr.onreadystatechange = function(){
+        if (xhr.readyState == 4) {
+          if (xhr.status == 200) {
+            success(JSON.parse(xhr.responseText));
+          } else {
+            failure(xhr.responseText);
+          }
+        }
+      };
+      xhr.open("GET", url, true);
+      xhr.send();
+    }
+    $ = document.querySelector.bind(document);
+    $$ = document.querySelectorAll.bind(document);
+
+    var renderTweets = function (tweets){
+      console.log(tweets)
+      $('main').innerHTML = tweets.map(renderTweet).join('');
+    };
+    var renderText = function (text) {
+      return text.replace(/[#@]\w+/g, function(e) {
+        return '<a class="external" href="#text/' + e + '">' + e + '</a>'
+      }).replace(/https?:\S+/g, function (e) {
+        return '<a target="_blank" class="external" href="' + e + '">' + e + '</a>'
+      }).replace(/\n/g, '<br>')
+    }
+    var renderTweet = function (tweet) {
+      return '<div class="reply ' + tweet.group + '">' + renderText(tweet.text) + '</div>';
+    }
+    var renderThread = function (thread) {
+      return '<div class="thread"><h3>' + renderText(thread.text) + '</h3>' + thread.replies.map(renderTweet).join('') + '</div>';
+    }
+    var renderThreads = function (threads) {
+      console.log(threads)
+      $('#error').innerHTML = '';
+      $('.count').innerHTML = threads.length;
+      $('main').innerHTML = threads.map(renderThread).join('');
+    }
+
+    $('#search-form').onsubmit = function (e) {
+      e.preventDefault();
+      location.hash = '/text/' + $('#search').value;
+    };
+
+    $$('.rumour').forEach(function(e){
+      e.onclick = function (e) {
+        location.hash = '/rumour/' + this.innerHTML;
+      };
+    });
+
+    window.onhashchange();
+  </script>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<html>
+<head>
+    <title>Rumour evaluation</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="wrapper">
+    <header><h1>Task 8</h1></header>
+    <form id="search-form" action="fetch-tweet" method="post">
+        <label for="tweet_id">TweetId:</label>
+        <input id="tweet_id" name="tweet_id">
+        <br/>
+        <label for="replies_list">Replies:</label>
+        <input id="replies_list" name="replies_list">
+        <br />
+        <button id="load">Load example ids</button>
+        <button type="submit">Fetch</button>
+        <a class="fetch" href="/">Go back</a>
+    </form>
+    <script>
+    var $ = document.getElementById.bind(document);
+    $('load').onclick = function(e){
+        e.preventDefault();
+        $('tweet_id').value = '827546123564900362';
+        $('replies_list').value = '827546225385816064,827546444919812096';
+    };
+    </script>
+</div>
+
+</body>
+</html>
